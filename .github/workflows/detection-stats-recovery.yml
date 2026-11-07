@@ -1,0 +1,74 @@
+name: Detection statistics publication recovery
+on:
+  push:
+    branches: [replacement-detection-stats-01]
+    paths: [.github/stats-recovery-ready]
+permissions:
+  contents: read
+  actions: read
+  issues: write
+concurrency:
+  group: detection-statistics-report
+  cancel-in-progress: false
+jobs:
+  recover:
+    if: github.repository == 'mohanad-hafez/gh-aw-threat-detection-checks'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5
+        with:
+          go-version-file: go.mod
+          cache: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: detection-stats-42407999683
+          run-id: 42407999683
+          github-token: ${{ github.token }}
+          path: stats-input
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: statistics-report
+          run-id: 42407999683
+          github-token: ${{ github.token }}
+          path: reviewed
+      - name: Verify retained evidence and code
+        run: |
+          echo '067e2257f14dd558b2df4d3f97d8798d2e092818d86c8dcc6ebb1e642b25b3a1  reviewed/stats-report-receipt.json' | sha256sum -c -
+          echo '4e378fa6bd8b3c8f263f39b56fffe9f0f65c4dbdce11fb34c5cdb11a93bc48b5  stats-input/stats.json' | sha256sum -c -
+          echo 'e496a3385d78e005495829408b1473a97d03444d9b1a84c58336c70c6fe90023  stats-input/summary.md' | sha256sum -c -
+          make fmt lint build test
+          mkdir -p stats-history
+          cp reviewed/stats-history/history.json stats-history/history.json
+      - name: Check reviewed rejection and publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$(gh api repos/mohanad-hafez/gh-aw-threat-detection-checks --jq .has_issues)" = true
+          gh api 'repos/mohanad-hafez/gh-aw-threat-detection-checks/issues?state=all&per_page=100' > recovery-preflight-issues.json
+          python3 - <<'PY'
+          import json
+          old=json.load(open('reviewed/stats-report-receipt.json'))
+          assert old['status']=='delivery_uncertain'
+          assert old['error']=='owned issue POST returned HTTP 410; inspect before retry'
+          assert not any(i['title']==old['output']['title'] for i in json.load(open('recovery-preflight-issues.json')))
+          PY
+          go run ./cmd/detection-stats-report
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: detection-stats-${{ github.run_id }}
+          path: stats-input/
+          retention-days: 7
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: statistics-report
+          path: |
+            stats-report-receipt.json
+            stats-history/history.json
+            recovery-preflight-issues.json
+          retention-days: 7
