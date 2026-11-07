@@ -1,0 +1,3383 @@
+{
+  "id": "8236cec2",
+  "task": "detectionMonitor",
+  "cases": [
+    {
+      "id": "empty",
+      "partition": "development",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": []
+      },
+      "expected": {
+        "action_count": 0,
+        "failure_kinds": [],
+        "log_read_count": 0
+      }
+    },
+    {
+      "id": "hard-failure",
+      "partition": "development",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 1,
+            "name": "Workflow 1",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1001,
+                "name": "detection",
+                "conclusion": "failure",
+                "log": "",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 1,
+        "failure_kinds": [
+          "job"
+        ],
+        "log_read_count": 0
+      }
+    },
+    {
+      "id": "soft-parse-error",
+      "partition": "development",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 2,
+            "name": "Workflow 2",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1002,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "reason=parse_error",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 1,
+        "failure_kinds": [
+          "step"
+        ],
+        "log_read_count": 1
+      }
+    },
+    {
+      "id": "hard-failure",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 3,
+            "name": "Workflow 3",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1003,
+                "name": "detection",
+                "conclusion": "failure",
+                "log": "",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 1,
+        "failure_kinds": [
+          "job"
+        ],
+        "log_read_count": 0
+      }
+    },
+    {
+      "id": "hard-timed_out",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 3,
+            "name": "Workflow 3",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1003,
+                "name": "detection",
+                "conclusion": "timed_out",
+                "log": "",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 1,
+        "failure_kinds": [
+          "job"
+        ],
+        "log_read_count": 0
+      }
+    },
+    {
+      "id": "hard-action_required",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 3,
+            "name": "Workflow 3",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1003,
+                "name": "detection",
+                "conclusion": "action_required",
+                "log": "",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 1,
+        "failure_kinds": [
+          "job"
+        ],
+        "log_read_count": 0
+      }
+    },
+    {
+      "id": "marker-threat-detect binary not found on PATH",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 4,
+            "name": "Workflow 4",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1004,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "threat-detect binary not found on PATH",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 1,
+        "failure_kinds": [
+          "step"
+        ],
+        "log_read_count": 1
+      }
+    },
+    {
+      "id": "marker-reason",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 4,
+            "name": "Workflow 4",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1004,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "reason=agent_failure",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 1,
+        "failure_kinds": [
+          "step"
+        ],
+        "log_read_count": 1
+      }
+    },
+    {
+      "id": "legitimate-reason=threat_detected",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 5,
+            "name": "Workflow 5",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1005,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "reason=threat_detected",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 0,
+        "failure_kinds": [],
+        "log_read_count": 1
+      }
+    },
+    {
+      "id": "legitimate-conclusion=warning",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 5,
+            "name": "Workflow 5",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1005,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "conclusion=warning",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 0,
+        "failure_kinds": [],
+        "log_read_count": 1
+      }
+    },
+    {
+      "id": "legitimate-::warning:: Legitimate threat",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 5,
+            "name": "Workflow 5",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1005,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "::warning:: Legitimate threat",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 0,
+        "failure_kinds": [],
+        "log_read_count": 1
+      }
+    },
+    {
+      "id": "legitimate-⚠️",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 5,
+            "name": "Workflow 5",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1005,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "⚠️",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 0,
+        "failure_kinds": [],
+        "log_read_count": 1
+      }
+    },
+    {
+      "id": "job-skipped",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 6,
+            "name": "Workflow 6",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1006,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "reason=parse_error",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 0,
+        "failure_kinds": [],
+        "log_read_count": 0
+      }
+    },
+    {
+      "id": "run-skipped",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 6,
+            "name": "Workflow 6",
+            "status": "completed",
+            "conclusion": "skipped",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1006,
+                "name": "detection",
+                "conclusion": "failure",
+                "log": "",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 0,
+        "failure_kinds": [],
+        "log_read_count": 0
+      }
+    },
+    {
+      "id": "job-cancelled",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 6,
+            "name": "Workflow 6",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1006,
+                "name": "detection",
+                "conclusion": "cancelled",
+                "log": "reason=parse_error",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 0,
+        "failure_kinds": [],
+        "log_read_count": 0
+      }
+    },
+    {
+      "id": "run-cancelled",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 6,
+            "name": "Workflow 6",
+            "status": "completed",
+            "conclusion": "cancelled",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1006,
+                "name": "detection",
+                "conclusion": "failure",
+                "log": "",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 0,
+        "failure_kinds": [],
+        "log_read_count": 0
+      }
+    },
+    {
+      "id": "exact-job-name",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 7,
+            "name": "Workflow 7",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 7,
+                "name": "Detection",
+                "conclusion": "failure"
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 0,
+        "failure_kinds": [],
+        "log_read_count": 0
+      }
+    },
+    {
+      "id": "in-progress",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 8,
+            "name": "Workflow 8",
+            "status": "in_progress",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1008,
+                "name": "detection",
+                "conclusion": "failure",
+                "log": "",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 0,
+        "failure_kinds": [],
+        "log_read_count": 0
+      }
+    },
+    {
+      "id": "outside-window",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 9,
+            "name": "Workflow 9",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-06T11:00:00.000Z",
+            "updated_at": "2026-11-06T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1009,
+                "name": "detection",
+                "conclusion": "failure",
+                "log": "",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 0,
+        "failure_kinds": [],
+        "log_read_count": 0
+      }
+    },
+    {
+      "id": "updated-in-window",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 10,
+            "name": "Workflow 10",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-05T12:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1010,
+                "name": "detection",
+                "conclusion": "failure",
+                "log": "",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 1,
+        "failure_kinds": [
+          "job"
+        ],
+        "log_read_count": 0
+      }
+    },
+    {
+      "id": "window-boundary",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 11,
+            "name": "Workflow 11",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-06T12:00:00.000Z",
+            "updated_at": "2026-11-06T12:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1011,
+                "name": "detection",
+                "conclusion": "failure",
+                "log": "",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 1,
+        "failure_kinds": [
+          "job"
+        ],
+        "log_read_count": 0
+      }
+    },
+    {
+      "id": "old-marker-excluded",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 12,
+            "name": "Workflow 12",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1012,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "reason=parse_error\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 0,
+        "failure_kinds": [],
+        "log_read_count": 1
+      }
+    },
+    {
+      "id": "marker-at-tail-boundary",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 13,
+            "name": "Workflow 13",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1013,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "reason=parse_error\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok\nok",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 1,
+        "failure_kinds": [
+          "step"
+        ],
+        "log_read_count": 1
+      }
+    },
+    {
+      "id": "deduplicate-run",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 14,
+            "name": "Workflow 14",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1014,
+                "name": "detection",
+                "conclusion": "failure",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 14,
+            "name": "Workflow 14",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1014,
+                "name": "detection",
+                "conclusion": "failure",
+                "log": "",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 1,
+        "failure_kinds": [
+          "job"
+        ],
+        "log_read_count": 0
+      }
+    },
+    {
+      "id": "soft-cap",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 20,
+            "name": "Workflow 20",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1020,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 21,
+            "name": "Workflow 21",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1021,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 22,
+            "name": "Workflow 22",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1022,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 23,
+            "name": "Workflow 23",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1023,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 24,
+            "name": "Workflow 24",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1024,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 25,
+            "name": "Workflow 25",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1025,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 26,
+            "name": "Workflow 26",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1026,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 27,
+            "name": "Workflow 27",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1027,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 28,
+            "name": "Workflow 28",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1028,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 29,
+            "name": "Workflow 29",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1029,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 30,
+            "name": "Workflow 30",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1030,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 31,
+            "name": "Workflow 31",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1031,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 32,
+            "name": "Workflow 32",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1032,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 33,
+            "name": "Workflow 33",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1033,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 34,
+            "name": "Workflow 34",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1034,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 35,
+            "name": "Workflow 35",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1035,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 36,
+            "name": "Workflow 36",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1036,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 37,
+            "name": "Workflow 37",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1037,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 38,
+            "name": "Workflow 38",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1038,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 39,
+            "name": "Workflow 39",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1039,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 40,
+            "name": "Workflow 40",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1040,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 41,
+            "name": "Workflow 41",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1041,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 42,
+            "name": "Workflow 42",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1042,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 43,
+            "name": "Workflow 43",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1043,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 44,
+            "name": "Workflow 44",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1044,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 45,
+            "name": "Workflow 45",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1045,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 46,
+            "name": "Workflow 46",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1046,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 47,
+            "name": "Workflow 47",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1047,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 48,
+            "name": "Workflow 48",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1048,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 49,
+            "name": "Workflow 49",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1049,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "ok",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 50,
+            "name": "Workflow 50",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1050,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "reason=parse_error",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 0,
+        "failure_kinds": [],
+        "log_read_count": 30,
+        "capped": true
+      }
+    },
+    {
+      "id": "hard-after-soft-cap",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 100,
+            "name": "Workflow 100",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1100,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 101,
+            "name": "Workflow 101",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1101,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 102,
+            "name": "Workflow 102",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1102,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 103,
+            "name": "Workflow 103",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1103,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 104,
+            "name": "Workflow 104",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1104,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 105,
+            "name": "Workflow 105",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1105,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 106,
+            "name": "Workflow 106",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1106,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 107,
+            "name": "Workflow 107",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1107,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 108,
+            "name": "Workflow 108",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1108,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 109,
+            "name": "Workflow 109",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1109,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 110,
+            "name": "Workflow 110",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1110,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 111,
+            "name": "Workflow 111",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1111,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 112,
+            "name": "Workflow 112",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1112,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 113,
+            "name": "Workflow 113",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1113,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 114,
+            "name": "Workflow 114",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1114,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 115,
+            "name": "Workflow 115",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1115,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 116,
+            "name": "Workflow 116",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1116,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 117,
+            "name": "Workflow 117",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1117,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 118,
+            "name": "Workflow 118",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1118,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 119,
+            "name": "Workflow 119",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1119,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 120,
+            "name": "Workflow 120",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1120,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 121,
+            "name": "Workflow 121",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1121,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 122,
+            "name": "Workflow 122",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1122,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 123,
+            "name": "Workflow 123",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1123,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 124,
+            "name": "Workflow 124",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1124,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 125,
+            "name": "Workflow 125",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1125,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 126,
+            "name": "Workflow 126",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1126,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 127,
+            "name": "Workflow 127",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1127,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 128,
+            "name": "Workflow 128",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1128,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 129,
+            "name": "Workflow 129",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1129,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 130,
+            "name": "Workflow 130",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1130,
+                "name": "detection",
+                "conclusion": "success",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 200,
+            "name": "Workflow 200",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1200,
+                "name": "detection",
+                "conclusion": "failure",
+                "log": "",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 1,
+        "failure_kinds": [
+          "job"
+        ],
+        "log_read_count": 30,
+        "capped": true
+      }
+    },
+    {
+      "id": "run-cap",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 300,
+            "name": "Workflow 300",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1300,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 301,
+            "name": "Workflow 301",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1301,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 302,
+            "name": "Workflow 302",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1302,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 303,
+            "name": "Workflow 303",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1303,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 304,
+            "name": "Workflow 304",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1304,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 305,
+            "name": "Workflow 305",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1305,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 306,
+            "name": "Workflow 306",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1306,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 307,
+            "name": "Workflow 307",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1307,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 308,
+            "name": "Workflow 308",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1308,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 309,
+            "name": "Workflow 309",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1309,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 310,
+            "name": "Workflow 310",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1310,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 311,
+            "name": "Workflow 311",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1311,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 312,
+            "name": "Workflow 312",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1312,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 313,
+            "name": "Workflow 313",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1313,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 314,
+            "name": "Workflow 314",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1314,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 315,
+            "name": "Workflow 315",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1315,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 316,
+            "name": "Workflow 316",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1316,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 317,
+            "name": "Workflow 317",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1317,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 318,
+            "name": "Workflow 318",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1318,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 319,
+            "name": "Workflow 319",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1319,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 320,
+            "name": "Workflow 320",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1320,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 321,
+            "name": "Workflow 321",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1321,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 322,
+            "name": "Workflow 322",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1322,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 323,
+            "name": "Workflow 323",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1323,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 324,
+            "name": "Workflow 324",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1324,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 325,
+            "name": "Workflow 325",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1325,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 326,
+            "name": "Workflow 326",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1326,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 327,
+            "name": "Workflow 327",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1327,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 328,
+            "name": "Workflow 328",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1328,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 329,
+            "name": "Workflow 329",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1329,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 330,
+            "name": "Workflow 330",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1330,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 331,
+            "name": "Workflow 331",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1331,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 332,
+            "name": "Workflow 332",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1332,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 333,
+            "name": "Workflow 333",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1333,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 334,
+            "name": "Workflow 334",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1334,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 335,
+            "name": "Workflow 335",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1335,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 336,
+            "name": "Workflow 336",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1336,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 337,
+            "name": "Workflow 337",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1337,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 338,
+            "name": "Workflow 338",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1338,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 339,
+            "name": "Workflow 339",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1339,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 340,
+            "name": "Workflow 340",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1340,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 341,
+            "name": "Workflow 341",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1341,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 342,
+            "name": "Workflow 342",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1342,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 343,
+            "name": "Workflow 343",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1343,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 344,
+            "name": "Workflow 344",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1344,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 345,
+            "name": "Workflow 345",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1345,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 346,
+            "name": "Workflow 346",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1346,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 347,
+            "name": "Workflow 347",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1347,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 348,
+            "name": "Workflow 348",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1348,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 349,
+            "name": "Workflow 349",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1349,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 350,
+            "name": "Workflow 350",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1350,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 351,
+            "name": "Workflow 351",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1351,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 352,
+            "name": "Workflow 352",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1352,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 353,
+            "name": "Workflow 353",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1353,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 354,
+            "name": "Workflow 354",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1354,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 355,
+            "name": "Workflow 355",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1355,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 356,
+            "name": "Workflow 356",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1356,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 357,
+            "name": "Workflow 357",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1357,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 358,
+            "name": "Workflow 358",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1358,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 359,
+            "name": "Workflow 359",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1359,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 360,
+            "name": "Workflow 360",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1360,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 361,
+            "name": "Workflow 361",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1361,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 362,
+            "name": "Workflow 362",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1362,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 363,
+            "name": "Workflow 363",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1363,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 364,
+            "name": "Workflow 364",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1364,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 365,
+            "name": "Workflow 365",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1365,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 366,
+            "name": "Workflow 366",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1366,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 367,
+            "name": "Workflow 367",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1367,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 368,
+            "name": "Workflow 368",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1368,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 369,
+            "name": "Workflow 369",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1369,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 370,
+            "name": "Workflow 370",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1370,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 371,
+            "name": "Workflow 371",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1371,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 372,
+            "name": "Workflow 372",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1372,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 373,
+            "name": "Workflow 373",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1373,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 374,
+            "name": "Workflow 374",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1374,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 375,
+            "name": "Workflow 375",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1375,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 376,
+            "name": "Workflow 376",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1376,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 377,
+            "name": "Workflow 377",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1377,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 378,
+            "name": "Workflow 378",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1378,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 379,
+            "name": "Workflow 379",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1379,
+                "name": "detection",
+                "conclusion": "skipped",
+                "log": "",
+                "steps": []
+              }
+            ]
+          },
+          {
+            "id": 500,
+            "name": "Workflow 500",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1500,
+                "name": "detection",
+                "conclusion": "failure",
+                "log": "",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 0,
+        "failure_kinds": [],
+        "log_read_count": 0
+      }
+    },
+    {
+      "id": "failed-log-best-effort",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 600,
+            "name": "Workflow 600",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1600,
+                "name": "detection",
+                "conclusion": "success",
+                "log_error": "permission denied"
+              }
+            ]
+          },
+          {
+            "id": 601,
+            "name": "Workflow 601",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1601,
+                "name": "detection",
+                "conclusion": "failure",
+                "log": "",
+                "steps": []
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 1,
+        "failure_kinds": [
+          "job"
+        ],
+        "log_read_count": 1
+      }
+    },
+    {
+      "id": "first-failed-step",
+      "partition": "held_out",
+      "input": {
+        "now": "2026-11-07T12:00:00Z",
+        "scan_url": "https://github.com/example/checks/actions/runs/1",
+        "runs": [
+          {
+            "id": 700,
+            "name": "Workflow 700",
+            "status": "completed",
+            "conclusion": "success",
+            "created_at": "2026-11-07T11:00:00.000Z",
+            "updated_at": "2026-11-07T11:00:00.000Z",
+            "jobs": [
+              {
+                "id": 1700,
+                "name": "detection",
+                "conclusion": "failure",
+                "steps": [
+                  {
+                    "name": "Install detector",
+                    "conclusion": "failure"
+                  },
+                  {
+                    "name": "Conclude",
+                    "conclusion": "failure"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "action_count": 1,
+        "failure_kinds": [
+          "job"
+        ],
+        "log_read_count": 0,
+        "reason": "Install detector"
+      }
+    }
+  ]
+}
