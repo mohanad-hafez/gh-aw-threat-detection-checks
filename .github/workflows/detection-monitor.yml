@@ -1,0 +1,35 @@
+name: Detection monitor
+on:
+  push:
+    branches: [replacement-detection-monitor-01]
+    paths: [.github/detection-monitor-ready]
+permissions:
+  contents: read
+  actions: read
+  issues: write
+concurrency:
+  group: detection-monitor
+  cancel-in-progress: false
+jobs:
+  monitor:
+    if: github.repository == 'mohanad-hafez/gh-aw-threat-detection-checks'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5
+        with:
+          go-version-file: go.mod
+          cache: false
+      - name: Check detection jobs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: go run ./cmd/detection-monitor monitor-receipt.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: detection-monitor
+          path: monitor-receipt.json
+          retention-days: 7
