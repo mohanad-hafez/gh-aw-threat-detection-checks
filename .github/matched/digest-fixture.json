@@ -1,0 +1,1475 @@
+{
+  "inputs": {
+    "issues_1": [
+      {
+        "number": 75442,
+        "title": "Self-hosted: support no-sudo Copilot installation in both agent and threat-detection jobs",
+        "state": "CLOSED",
+        "createdAt": "2026-11-06T15:09:52Z",
+        "updatedAt": "2026-11-07T01:24:00Z",
+        "url": "https://github.com/github/gh-aw/issues/75442",
+        "author": {
+          "login": "lpcox"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "bug"
+            },
+            {
+              "name": "copilot"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 75440,
+        "title": "Self-hosted: select rootless threat-detect installation independently of ARC/DinD topology",
+        "state": "CLOSED",
+        "createdAt": "2026-11-06T15:09:52Z",
+        "updatedAt": "2026-11-07T00:29:06Z",
+        "url": "https://github.com/github/gh-aw/issues/75440",
+        "author": {
+          "login": "lpcox"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "bug"
+            },
+            {
+              "name": "compiler"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 74955,
+        "title": "Copilot detection alias stops resolving without legacy mini models: add Luna support and fallbacks",
+        "state": "CLOSED",
+        "createdAt": "2026-11-04T19:22:20Z",
+        "updatedAt": "2026-11-05T00:51:21Z",
+        "url": "https://github.com/github/gh-aw/issues/74955",
+        "author": {
+          "login": "SivaKesava1"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "bug"
+            },
+            {
+              "name": "high-priority"
+            },
+            {
+              "name": "copilot"
+            },
+            {
+              "name": "threat-detection"
+            },
+            {
+              "name": "model-routing"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 73552,
+        "title": "audit: failed continue-on-error evals and threat-detection engine steps are invisible (pre-flight failures report as workflow_succeeded)",
+        "state": "CLOSED",
+        "createdAt": "2026-10-31T18:10:32Z",
+        "updatedAt": "2026-11-01T04:37:07Z",
+        "url": "https://github.com/github/gh-aw/issues/73552",
+        "author": {
+          "login": "SivaKesava1"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "bug"
+            },
+            {
+              "name": "cli"
+            },
+            {
+              "name": "threat-detection"
+            },
+            {
+              "name": "model-routing"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 73045,
+        "title": "Evals and detection jobs set an unreachable host.docker.internal LLM gateway URL for non-Anthropic providers (Claude on Copilot)",
+        "state": "CLOSED",
+        "createdAt": "2026-10-29T21:44:30Z",
+        "updatedAt": "2026-10-30T00:19:20Z",
+        "url": "https://github.com/github/gh-aw/issues/73045",
+        "author": {
+          "login": "SivaKesava1"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "bug"
+            },
+            {
+              "name": "high-priority"
+            },
+            {
+              "name": "compiler"
+            },
+            {
+              "name": "threat-detection"
+            },
+            {
+              "name": "model-routing"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 72899,
+        "title": "Confirm the conclude_threat_detection.sh skipped path on ARC after a repository-initiated cancellation",
+        "state": "OPEN",
+        "createdAt": "2026-10-29T08:05:52Z",
+        "updatedAt": "2026-10-29T11:02:59Z",
+        "url": "https://github.com/github/gh-aw/issues/72899",
+        "author": {
+          "login": "jonas-harmoney"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "community"
+            },
+            {
+              "name": "ai-inspected"
+            },
+            {
+              "name": "arc"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 71500,
+        "title": "[gh-aw-threat-detection]: Pin to v0.5.3 (from v0.5.2)",
+        "state": "CLOSED",
+        "createdAt": "2026-10-23T22:20:49Z",
+        "updatedAt": "2026-10-23T22:49:20Z",
+        "url": "https://github.com/github/gh-aw/issues/71500",
+        "author": {
+          "login": "davidslater"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "bug"
+            },
+            {
+              "name": "dependencies"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 66852,
+        "title": "Claude threat detection follows the newest listed Haiku and fails open when it is unpriced; GH_AW_MODEL_DETECTION_CLAUDE never reaches the detection step",
+        "state": "CLOSED",
+        "createdAt": "2026-10-08T10:45:30Z",
+        "updatedAt": "2026-10-17T14:53:39Z",
+        "url": "https://github.com/github/gh-aw/issues/66852",
+        "author": {
+          "login": "benissimo"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "bug"
+            },
+            {
+              "name": "community"
+            },
+            {
+              "name": "ai-inspected"
+            },
+            {
+              "name": "awf"
+            },
+            {
+              "name": "threat-detection"
+            },
+            {
+              "name": "model-routing"
+            },
+            {
+              "name": "cluster:model-compatibility"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 67789,
+        "title": "Routing smokes never run the default threat-detection engine, and nothing checks that detection stays unrouted",
+        "state": "CLOSED",
+        "createdAt": "2026-10-11T21:06:35Z",
+        "updatedAt": "2026-10-12T16:22:43Z",
+        "url": "https://github.com/github/gh-aw/issues/67789",
+        "author": {
+          "login": "SivaKesava1"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "bug"
+            },
+            {
+              "name": "testing"
+            },
+            {
+              "name": "threat-detection"
+            },
+            {
+              "name": "model-routing"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 29390,
+        "title": "Built-in GitHub labels for promoting and demoting object integrity",
+        "state": "CLOSED",
+        "createdAt": "2026-04-30T22:25:52Z",
+        "updatedAt": "2026-10-12T13:11:21Z",
+        "url": "https://github.com/github/gh-aw/issues/29390",
+        "author": {
+          "login": "lpcox"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "enhancement"
+            },
+            {
+              "name": "security"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      }
+    ],
+    "issues_2": [
+      {
+        "number": 28775,
+        "title": "ASI-06: Sanitize repo-memory and cache-memory content before prompt injection",
+        "state": "CLOSED",
+        "createdAt": "2026-04-27T17:52:48Z",
+        "updatedAt": "2026-10-12T13:11:20Z",
+        "url": "https://github.com/github/gh-aw/issues/28775",
+        "author": {
+          "login": "lpcox"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "enhancement"
+            },
+            {
+              "name": "security"
+            },
+            {
+              "name": "workflows"
+            },
+            {
+              "name": "compiler"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 67252,
+        "title": "Tests: compiled routed workflows keep the threat-detection job",
+        "state": "CLOSED",
+        "createdAt": "2026-10-09T18:18:05Z",
+        "updatedAt": "2026-10-09T22:44:14Z",
+        "url": "https://github.com/github/gh-aw/issues/67252",
+        "author": {
+          "login": "SivaKesava1"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "testing"
+            },
+            {
+              "name": "safe-outputs"
+            },
+            {
+              "name": "compiler"
+            },
+            {
+              "name": "threat-detection"
+            },
+            {
+              "name": "model-routing"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 59038,
+        "title": "threat-detect: \"compact fallback prompt\" returns 400 Bad Request when the full prompt exceeds 100KB",
+        "state": "CLOSED",
+        "createdAt": "2026-09-06T21:48:13Z",
+        "updatedAt": "2026-09-23T21:37:56Z",
+        "url": "https://github.com/github/gh-aw/issues/59038",
+        "author": {
+          "login": "jaroslawgajewski"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "community"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 62971,
+        "title": "threat-detection job's AWF sandbox images ignore `sandbox.agent.images` / `container_pins` (always resolve to `ghcr.io`)",
+        "state": "CLOSED",
+        "createdAt": "2026-09-23T14:46:43Z",
+        "updatedAt": "2026-09-23T21:17:44Z",
+        "url": "https://github.com/github/gh-aw/issues/62971",
+        "author": {
+          "login": "alirezamirian"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "community"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 59935,
+        "title": "Detection job on arc-dind: threat-detect not staged, output path is read-only and unread",
+        "state": "CLOSED",
+        "createdAt": "2026-09-10T09:16:34Z",
+        "updatedAt": "2026-09-23T11:17:41Z",
+        "url": "https://github.com/github/gh-aw/issues/59935",
+        "author": {
+          "login": "jonas-harmoney"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "community"
+            },
+            {
+              "name": "awf"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 59487,
+        "title": "External threat detection fails on ARC/DinD: `threat-detect` is not staged into the chroot",
+        "state": "CLOSED",
+        "createdAt": "2026-09-08T15:36:12Z",
+        "updatedAt": "2026-09-22T22:37:50Z",
+        "url": "https://github.com/github/gh-aw/issues/59487",
+        "author": {
+          "login": "rhardouin"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "community"
+            },
+            {
+              "name": "ai-inspected"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 57792,
+        "title": "Support independently pinned threat-detect artifacts",
+        "state": "CLOSED",
+        "createdAt": "2026-09-01T23:03:59Z",
+        "updatedAt": "2026-09-22T20:26:17Z",
+        "url": "https://github.com/github/gh-aw/issues/57792",
+        "author": {
+          "login": "loganrosen"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "community"
+            },
+            {
+              "name": "ai-inspected"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 61855,
+        "title": "Embed independently reviewed threat-detect digests in compiled workflows",
+        "state": "CLOSED",
+        "createdAt": "2026-09-18T21:55:45Z",
+        "updatedAt": "2026-09-22T20:26:16Z",
+        "url": "https://github.com/github/gh-aw/issues/61855",
+        "author": {
+          "login": "davidslater"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "community"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 59622,
+        "title": "Threat detection fails with `config_error` for every custom engine and the run still passes",
+        "state": "CLOSED",
+        "createdAt": "2026-09-09T03:48:21Z",
+        "updatedAt": "2026-09-09T10:59:32Z",
+        "url": "https://github.com/github/gh-aw/issues/59622",
+        "author": {
+          "login": "dsfaccini"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 56438,
+        "title": "Update gh-aw-threat-detection to v0.5.1",
+        "state": "CLOSED",
+        "createdAt": "2026-08-27T22:01:30Z",
+        "updatedAt": "2026-08-27T22:43:18Z",
+        "url": "https://github.com/github/gh-aw/issues/56438",
+        "author": {
+          "login": "davidslater"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      }
+    ],
+    "issues_3": [
+      {
+        "number": 56397,
+        "title": "`Prepare Codex config for threat-detect` points Codex at the Anthropic api-proxy port (10001), breaks detection",
+        "state": "CLOSED",
+        "createdAt": "2026-08-27T17:34:54Z",
+        "updatedAt": "2026-08-27T22:24:20Z",
+        "url": "https://github.com/github/gh-aw/issues/56397",
+        "author": {
+          "login": "davidslater"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "bug"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 56384,
+        "title": "threat-detection: investigate 32 `agent_failure` soft failures (2026-08-26) and why detection flagged them",
+        "state": "CLOSED",
+        "createdAt": "2026-08-27T16:27:16Z",
+        "updatedAt": "2026-08-27T21:19:01Z",
+        "url": "https://github.com/github/gh-aw/issues/56384",
+        "author": {
+          "login": "davidslater"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 55530,
+        "title": "[gh-aw-threat-detection] pipe --engine-timeout, --max-turns, --retries from workflow frontmatter",
+        "state": "CLOSED",
+        "createdAt": "2026-08-24T22:09:42Z",
+        "updatedAt": "2026-08-24T23:47:34Z",
+        "url": "https://github.com/github/gh-aw/issues/55530",
+        "author": {
+          "login": "davidslater"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 54597,
+        "title": "v0.87.2 external threat-detect: detection step lost its timeout-minutes, and its AWF install lost --rootless",
+        "state": "CLOSED",
+        "createdAt": "2026-08-21T19:15:29Z",
+        "updatedAt": "2026-08-21T23:18:34Z",
+        "url": "https://github.com/github/gh-aw/issues/54597",
+        "author": {
+          "login": "rbstp"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "community"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 54045,
+        "title": "Threat detection loops and retries for ~20 minutes when its file cleanup command fails in the sandbox",
+        "state": "CLOSED",
+        "createdAt": "2026-08-19T16:14:38Z",
+        "updatedAt": "2026-08-21T18:06:51Z",
+        "url": "https://github.com/github/gh-aw/issues/54045",
+        "author": {
+          "login": "theletterf"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "bug"
+            },
+            {
+              "name": "community"
+            },
+            {
+              "name": "performance"
+            },
+            {
+              "name": "workflows"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 54046,
+        "title": "Threat-detection model usage is invisible to token-usage artifacts and AI-credits accounting",
+        "state": "CLOSED",
+        "createdAt": "2026-08-19T16:14:53Z",
+        "updatedAt": "2026-08-21T18:06:16Z",
+        "url": "https://github.com/github/gh-aw/issues/54046",
+        "author": {
+          "login": "theletterf"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "community"
+            },
+            {
+              "name": "performance"
+            },
+            {
+              "name": "workflows"
+            },
+            {
+              "name": "needs-triage"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 54047,
+        "title": "No supported way to set a per-phase model when splitting engines between agent and threat detection",
+        "state": "CLOSED",
+        "createdAt": "2026-08-19T16:15:09Z",
+        "updatedAt": "2026-08-21T18:05:43Z",
+        "url": "https://github.com/github/gh-aw/issues/54047",
+        "author": {
+          "login": "theletterf"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "enhancement"
+            },
+            {
+              "name": "copilot"
+            },
+            {
+              "name": "community"
+            },
+            {
+              "name": "performance"
+            },
+            {
+              "name": "safe-outputs"
+            },
+            {
+              "name": "cli"
+            },
+            {
+              "name": "compiler"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 54331,
+        "title": "`allowed-events` should constrain the generated PR review tool schema",
+        "state": "CLOSED",
+        "createdAt": "2026-08-20T19:31:38Z",
+        "updatedAt": "2026-08-21T17:22:16Z",
+        "url": "https://github.com/github/gh-aw/issues/54331",
+        "author": {
+          "login": "jonathanpeppers"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "bug"
+            },
+            {
+              "name": "community"
+            },
+            {
+              "name": "safe-outputs"
+            },
+            {
+              "name": "workflows"
+            },
+            {
+              "name": "compiler"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 53749,
+        "title": "copilot engine: threat-detection step touches an unused agent-step-summary.md",
+        "state": "CLOSED",
+        "createdAt": "2026-08-18T16:12:28Z",
+        "updatedAt": "2026-08-21T15:16:40Z",
+        "url": "https://github.com/github/gh-aw/issues/53749",
+        "author": {
+          "login": "gregsmi"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "bug"
+            },
+            {
+              "name": "copilot"
+            },
+            {
+              "name": "community"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 54054,
+        "title": "detection -> Install ripgrep not completing",
+        "state": "CLOSED",
+        "createdAt": "2026-08-19T16:56:40Z",
+        "updatedAt": "2026-08-20T19:37:40Z",
+        "url": "https://github.com/github/gh-aw/issues/54054",
+        "author": {
+          "login": "ckittel"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "bug"
+            },
+            {
+              "name": "copilot"
+            },
+            {
+              "name": "community"
+            },
+            {
+              "name": "performance"
+            },
+            {
+              "name": "workflows"
+            },
+            {
+              "name": "cli"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      }
+    ],
+    "issues_4": [
+      {
+        "number": 52303,
+        "title": "safe-outputs.jobs.<id>.runs-on rejects the runner-group object form",
+        "state": "CLOSED",
+        "createdAt": "2026-08-12T14:32:59Z",
+        "updatedAt": "2026-08-20T00:50:10Z",
+        "url": "https://github.com/github/gh-aw/issues/52303",
+        "author": {
+          "login": "Etienne-M"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "bug"
+            },
+            {
+              "name": "community"
+            },
+            {
+              "name": "safe-outputs"
+            },
+            {
+              "name": "workflows"
+            },
+            {
+              "name": "cli"
+            },
+            {
+              "name": "compiler"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 52327,
+        "title": "install_copilot_cli.sh: cached toolcache hit never places binary at /usr/local/bin/copilot, causing spawn ENOENT",
+        "state": "CLOSED",
+        "createdAt": "2026-08-12T15:59:36Z",
+        "updatedAt": "2026-08-13T16:15:32Z",
+        "url": "https://github.com/github/gh-aw/issues/52327",
+        "author": {
+          "login": "alexsiilvaa"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "bug"
+            },
+            {
+              "name": "copilot"
+            },
+            {
+              "name": "workflows"
+            },
+            {
+              "name": "cli"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 50651,
+        "title": "threat-detection: enable and upload the structured JSONL run log on the external path",
+        "state": "CLOSED",
+        "createdAt": "2026-08-05T17:39:15Z",
+        "updatedAt": "2026-08-07T17:33:30Z",
+        "url": "https://github.com/github/gh-aw/issues/50651",
+        "author": {
+          "login": "davidslater"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "community"
+            },
+            {
+              "name": "cookie"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 50656,
+        "title": "Meta: enable gh-aw-threat-detection v0.4.0 on the external detection path",
+        "state": "CLOSED",
+        "createdAt": "2026-08-05T17:48:40Z",
+        "updatedAt": "2026-08-07T14:20:05Z",
+        "url": "https://github.com/github/gh-aw/issues/50656",
+        "author": {
+          "login": "davidslater"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "enhancement"
+            },
+            {
+              "name": "automation"
+            },
+            {
+              "name": "high-priority"
+            },
+            {
+              "name": "community"
+            },
+            {
+              "name": "cookie"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 50647,
+        "title": "threat-detection: stage prompt-template, prompt-import-tree, aw_info.json and comment-memory into the detection dir",
+        "state": "CLOSED",
+        "createdAt": "2026-08-05T17:37:00Z",
+        "updatedAt": "2026-08-06T18:54:56Z",
+        "url": "https://github.com/github/gh-aw/issues/50647",
+        "author": {
+          "login": "davidslater"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "community"
+            },
+            {
+              "name": "cookie"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 50645,
+        "title": "threat-detection: strict-mode conclude failure writes no outputs, rendering infra failures as detected threats",
+        "state": "CLOSED",
+        "createdAt": "2026-08-05T17:33:38Z",
+        "updatedAt": "2026-08-06T15:23:55Z",
+        "url": "https://github.com/github/gh-aw/issues/50645",
+        "author": {
+          "login": "davidslater"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "bug"
+            },
+            {
+              "name": "high-priority"
+            },
+            {
+              "name": "cookie"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 50646,
+        "title": "threat-detection: delegate all conclude branches to `threat-detect conclude` on the external path",
+        "state": "CLOSED",
+        "createdAt": "2026-08-05T17:34:50Z",
+        "updatedAt": "2026-08-06T14:53:40Z",
+        "url": "https://github.com/github/gh-aw/issues/50646",
+        "author": {
+          "login": "davidslater"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "cookie"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 50655,
+        "title": "threat-detection: document macOS support and add installer platform-mapping tests",
+        "state": "CLOSED",
+        "createdAt": "2026-08-05T17:47:54Z",
+        "updatedAt": "2026-08-06T13:28:53Z",
+        "url": "https://github.com/github/gh-aw/issues/50655",
+        "author": {
+          "login": "davidslater"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "cookie"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 50649,
+        "title": "threat-detection: workflow context and detection env vars never reach the external detector execution step",
+        "state": "CLOSED",
+        "createdAt": "2026-08-05T17:38:23Z",
+        "updatedAt": "2026-08-06T13:23:09Z",
+        "url": "https://github.com/github/gh-aw/issues/50649",
+        "author": {
+          "login": "davidslater"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "cookie"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 50653,
+        "title": "threat-detection: external path writes an unused prompt to the step summary, duplicating the detector's real one",
+        "state": "CLOSED",
+        "createdAt": "2026-08-05T17:42:29Z",
+        "updatedAt": "2026-08-06T13:03:13Z",
+        "url": "https://github.com/github/gh-aw/issues/50653",
+        "author": {
+          "login": "davidslater"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "cookie"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      }
+    ],
+    "issues_5": [
+      {
+        "number": 50659,
+        "title": "threat-detection: GITHUB_STEP_SUMMARY is unwritable in the AWF sandbox, aborting the v0.4.0 detector with exit 2",
+        "state": "CLOSED",
+        "createdAt": "2026-08-05T17:59:50Z",
+        "updatedAt": "2026-08-06T03:07:57Z",
+        "url": "https://github.com/github/gh-aw/issues/50659",
+        "author": {
+          "login": "davidslater"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "bug"
+            },
+            {
+              "name": "high-priority"
+            },
+            {
+              "name": "cookie"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 50654,
+        "title": "threat-detection: `max-ai-credits` is not propagated to the external detector's AWF config",
+        "state": "CLOSED",
+        "createdAt": "2026-08-05T17:45:58Z",
+        "updatedAt": "2026-08-06T02:25:45Z",
+        "url": "https://github.com/github/gh-aw/issues/50654",
+        "author": {
+          "login": "davidslater"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "cookie"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 50644,
+        "title": "threat-detection: bump external detector pin to threat-detect v0.4.* (Wait for v0.4.* to pass local smokes)",
+        "state": "CLOSED",
+        "createdAt": "2026-08-05T17:33:16Z",
+        "updatedAt": "2026-08-06T00:16:44Z",
+        "url": "https://github.com/github/gh-aw/issues/50644",
+        "author": {
+          "login": "davidslater"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "cookie"
+            },
+            {
+              "name": "blocked"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 28830,
+        "title": "Cache-memory cross-run poisoning: migrate-legacy-files ingests unvalidated content (XPIA surface)",
+        "state": "CLOSED",
+        "createdAt": "2026-04-28T00:30:03Z",
+        "updatedAt": "2026-07-29T14:57:22Z",
+        "url": "https://github.com/github/gh-aw/issues/28830",
+        "author": {
+          "login": "lpcox"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "bug"
+            },
+            {
+              "name": "security"
+            },
+            {
+              "name": "workflows"
+            },
+            {
+              "name": "compiler"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 47831,
+        "title": "Codex threat-detection config.toml emits `model_provider` under `[history]` table (breaks AWF proxy routing)",
+        "state": "CLOSED",
+        "createdAt": "2026-07-24T17:32:31Z",
+        "updatedAt": "2026-07-24T21:00:31Z",
+        "url": "https://github.com/github/gh-aw/issues/47831",
+        "author": {
+          "login": "davidslater"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "bug"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 28770,
+        "title": "OWASP Agentic Top 10 compliance evaluation: gap analysis across gh-aw, firewall, and mcpg",
+        "state": "OPEN",
+        "createdAt": "2026-04-27T17:37:20Z",
+        "updatedAt": "2026-07-23T06:43:43Z",
+        "url": "https://github.com/github/gh-aw/issues/28770",
+        "author": {
+          "login": "lpcox"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "documentation"
+            },
+            {
+              "name": "security"
+            },
+            {
+              "name": "mcp"
+            },
+            {
+              "name": "workflows"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 46807,
+        "title": "cache-memory: update_cache_memory (+ conclusion AIC cache) save fails \"token has no writable scopes\" — job lacks actions: write",
+        "state": "CLOSED",
+        "createdAt": "2026-07-20T11:37:28Z",
+        "updatedAt": "2026-07-21T13:34:12Z",
+        "url": "https://github.com/github/gh-aw/issues/46807",
+        "author": {
+          "login": "arabkin"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "bug"
+            },
+            {
+              "name": "automation"
+            },
+            {
+              "name": "community"
+            },
+            {
+              "name": "safe-outputs"
+            },
+            {
+              "name": "workflows"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 45923,
+        "title": "Threat detection always fails with codex + custom OPENAI_BASE_URL: detection api-proxy never receives the custom target",
+        "state": "CLOSED",
+        "createdAt": "2026-07-16T06:13:58Z",
+        "updatedAt": "2026-07-17T02:55:09Z",
+        "url": "https://github.com/github/gh-aw/issues/45923",
+        "author": {
+          "login": "alvistar"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "bug"
+            },
+            {
+              "name": "community"
+            },
+            {
+              "name": "cli"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 44984,
+        "title": "Threat detection jobs inherit rootless AWF when network-isolation enabled (#41267)",
+        "state": "CLOSED",
+        "createdAt": "2026-07-11T16:07:14Z",
+        "updatedAt": "2026-07-15T06:07:12Z",
+        "url": "https://github.com/github/gh-aw/issues/44984",
+        "author": {
+          "login": "Tarekchehahde"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "bug"
+            },
+            {
+              "name": "testing"
+            },
+            {
+              "name": "community"
+            },
+            {
+              "name": "workflows"
+            },
+            {
+              "name": "compiler"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      },
+      {
+        "number": 39911,
+        "title": "Migrate gh-aw's inline threat detection to the standalone `gh-aw-threat-detection` detector",
+        "state": "CLOSED",
+        "createdAt": "2026-06-17T22:17:05Z",
+        "updatedAt": "2026-06-22T00:33:51Z",
+        "url": "https://github.com/github/gh-aw/issues/39911",
+        "author": {
+          "login": "davidslater"
+        },
+        "labels": {
+          "nodes": [
+            {
+              "name": "enhancement"
+            },
+            {
+              "name": "workflows"
+            },
+            {
+              "name": "compiler"
+            },
+            {
+              "name": "threat-detection"
+            }
+          ],
+          "pageInfo": {
+            "hasNextPage": false
+          }
+        }
+      }
+    ],
+    "clock": "2026-11-07T20:22:31Z",
+    "cache": null
+  },
+  "output_description": "Submit JSON with status, writes and state. State must include reported_issue_numbers, pending_issue_numbers, pending_since and last_run_at."
+}

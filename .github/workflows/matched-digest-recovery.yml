@@ -1,0 +1,68 @@
+name: Matched issue digest baseline
+on:
+  push:
+    branches: [matched-issue-digest-02]
+permissions:
+  contents: read
+jobs:
+  baseline:
+    if: github.repository == 'mohanad-hafez/gh-aw-threat-detection-checks'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 9
+    permissions:
+      contents: read
+      copilot-requests: write
+    strategy:
+      fail-fast: false
+      matrix:
+        arm: [agent, script]
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5
+        if: matrix.arm == 'script'
+        with:
+          go-version-file: go.mod
+          cache: false
+      - name: Install Copilot
+        if: matrix.arm == 'agent'
+        run: npm install --global @github/copilot@1.0.108
+      - name: Initialize the cold cache baseline
+        env:
+          ARM: ${{ matrix.arm }}
+          GITHUB_TOKEN: ${{ matrix.arm == 'agent' && github.token || '' }}
+        run: |
+          mkdir evidence
+          if [ "$ARM" = script ]; then
+            go run ./cmd/matched-digest > evidence/go-result.json
+          else
+            node -e 'const c=process.cwd(),m=c+"/.github/matched";console.log(JSON.stringify({mcpServers:{fixture:{type:"local",command:"node",args:[m+"/component_fixture.cjs",m+"/digest-fixture.json",c+"/evidence/tools.jsonl"],tools:["*"]}}}))' > fixture-mcp.json
+            timeout 180s copilot --disable-builtin-mcps --disable-client-telemetry \
+              --additional-mcp-config=@fixture-mcp.json \
+              --available-tools=fixture-read_input,fixture-publish_result \
+              --allow-tool=fixture --no-ask-user --no-color --silent \
+              --prompt "$(cat .github/matched/digest-prompt.md)" > evidence/output.txt 2> evidence/diagnostics.txt
+          fi
+          node .github/matched/digest-cache.cjs
+      - uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: digest-cache
+          key: matched-digest-${{ github.run_id }}-${{ matrix.arm }}
+      - name: Move the working cache aside
+        run: mv digest-cache digest-held
+      - uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: digest-cache
+          key: matched-digest-${{ github.run_id }}-${{ matrix.arm }}
+          fail-on-cache-miss: true
+      - name: Verify restored bytes
+        run: |
+          cmp digest-held/reported-issues.json digest-cache/reported-issues.json
+          cp digest-cache/reported-issues.json evidence/restored-state.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: digest-${{ matrix.arm }}
+          path: evidence/
+          retention-days: 14
