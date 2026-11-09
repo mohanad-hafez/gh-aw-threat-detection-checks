@@ -1,0 +1,31 @@
+{
+  "inputs": {
+    "summary": "Partial collection for 2026-11-06. 4031 workflow runs were listed, including 573 observed external-detector runs. Recorded detection-job error rate: 0% in the inspected sample. Zero verdicts were fetched, so threat rate and verdict-based soft failures are unavailable.",
+    "stats": {
+      "date": "2026-11-06",
+      "repository": "github/gh-aw",
+      "totals": {
+        "external_detector_runs": 573
+      },
+      "collection": {
+        "rates_cover_partial_day": true,
+        "truncations": [
+          "detection-job inspection stopped after 699/1842 agentic runs (budget exhausted); the remaining runs are recorded as not_inspected",
+          "verdict fetching stopped after 0/194 runs (budget exhausted)"
+        ]
+      },
+      "error_rate_pct": 0,
+      "soft_failures": {
+        "count": 0
+      },
+      "detection_results": {
+        "with_verdict": 0,
+        "any_threat": 0,
+        "threat_rate_pct": 0
+      },
+      "by_workflow": []
+    },
+    "history": null
+  },
+  "output_description": "Return a JSON object with history, baseline, comparison, and watch."
+}
